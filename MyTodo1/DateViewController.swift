@@ -19,17 +19,38 @@ class DateViewController: UIViewController {
     
     var todo: TodoItem?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let todo = todo {
+            self.title = "Edit Todo"
+            if todo.image == "child-selected"{
+                childButton.isSelected = true
+            }
+            else if todo.image == "phone-selected"{
+                phoneButton.isSelected = true
+            }
+            else if todo.image == "shopping-selected"{
+                shoppingButton.isSelected = true
+            }
+            else if todo.image == "travel-selected"{
+                travelButton.isSelected = true
+            }
+            
+            todoItemLabel.text = todo.title
+            todoDatePicker.setDate(todo.date, animated: false)
+        } else {
+            title = "New Todo"
+            childButton.isSelected = true
+        }
+        
     }
     
 
     @IBAction func selectChild(_ sender: Any) {
         resetButton()
         phoneButton.isSelected = true
+        //childButton.backgroundImage(for: UIControl.)
     }
     
     @IBAction func selectPhone(_ sender: Any) {
@@ -58,15 +79,19 @@ class DateViewController: UIViewController {
         var image = ""
         if childButton.isSelected {
             image = "child-selected"
+            print("child\n")
         }
         else if phoneButton.isSelected {
             image = "phone-selected"
+            print("phone\n")
         }
         else if shoppingButton.isSelected {
-            image = "shopping-cart-selected"
+            image = "shopping-selected"
+            print("shopping\n")
         }
         else if travelButton.isSelected {
             image = "travel-selected"
+            print("travel\n")
         }
         
         if let todo = todo {
@@ -78,9 +103,7 @@ class DateViewController: UIViewController {
             todo = TodoItem(id: uuid, image: image, title: todoItemLabel.text!, date: todoDatePicker.date)
            // todos.append(todo!)
         }
-        
-        
-        
+
     }
     
     /*
