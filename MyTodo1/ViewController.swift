@@ -8,6 +8,8 @@
 
 import UIKit
 
+var todos: [TodoItem] = []
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
